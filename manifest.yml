@@ -1,27 +1,25 @@
 lzc-sdk-version: "0.1"
 name: HandBrake
 package: cloud.lazycat.app.handbrake
-version: 0.7.3
+version: 0.8.1
 description: 一个自托管的HandBrake Web平台
 homepage: https://github.com/TheNickOfTime/handbrake-web
 author: TheNickOfTime
 application:
   subdomain: handbrake
   background_task: true
-  multi_instance: false
-  gpu_accel: false
-  kvm_accel: false
-  usb_accel: false
   routes:
-    - /=http://handbrake-server.cloud.lazycat.app.handbrake.lzcapp:9999/
+    - /=http://handbrake-server:9999/
 services:
   handbrake-server:
-    image: registry.lazycat.cloud/czyt/thenickoftime/handbrake-web-server:f732a198cd6dbe28
+    # ghcr.io/thenickoftime/handbrake-web-server:0.8.1
+    image: registry.lazycat.cloud/czyt/thenickoftime/handbrake-web-server:f1e619f63d556f87
     binds:
       - /lzcapp/var/data:/data
       - /lzcapp/var/video:/video
   handbrake-worker:
-    image: registry.lazycat.cloud/czyt/thenickoftime/handbrake-web-worker:049954336420774c
+    #  ghcr.io/thenickoftime/handbrake-web-worker:0.8.1
+    image: registry.lazycat.cloud/czyt/thenickoftime/handbrake-web-worker:7f496862c3299c95
     environment:
       - WORKER_ID=handbrake-worker
       - SERVER_URL=handbrake-server
@@ -33,3 +31,11 @@ services:
 unsupported_platforms:
   - ios
   - android
+
+locales:
+  zh:
+    name: "HandBrake"
+    description: "一个自托管的HandBrake Web平台"
+  en:
+    name: "HandBrake"
+    description: "A self-hosted platform to use HandBrake on your headless devices via a bespoke web interface"
