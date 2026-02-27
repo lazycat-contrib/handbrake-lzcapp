@@ -13,6 +13,7 @@ application:
 services:
   handbrake-server:
     # ghcr.io/thenickoftime/handbrake-web-server:0.8.1
+    user: root
     image: registry.lazycat.cloud/czyt/thenickoftime/handbrake-web-server:f1e619f63d556f87
     binds:
       - /lzcapp/var/data:/data
@@ -20,6 +21,7 @@ services:
   handbrake-worker:
     #  ghcr.io/thenickoftime/handbrake-web-worker:0.8.1
     image: registry.lazycat.cloud/czyt/thenickoftime/handbrake-web-worker:7f496862c3299c95
+    user: root
     environment:
       - WORKER_ID=handbrake-worker
       - SERVER_URL=handbrake-server
