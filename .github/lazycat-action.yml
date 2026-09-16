@@ -1,0 +1,47 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: .lazycat-build/handbrake.lpk
+  target_arch: amd64
+
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: handbrake-server
+build:
+  run_buildscript: false
+images:
+  # 主应用：上游完整三段 SemVer 家族（0.5.0 ... 0.8.1），排除 latest/dev/main/pr-*
+  - id: handbrake-server
+    target: service
+    service: handbrake-server
+    source: ghcr.io/thenickoftime/handbrake-web-server
+    channel: stable
+    sort: semver
+    tag_regex: '^v?\d+\.\d+\.\d+$'
+    delivery:
+      mode: lazycat
+  - id: handbrake-worker
+    target: service
+    service: handbrake-worker
+    source: ghcr.io/thenickoftime/handbrake-web-worker
+    channel: stable
+    sort: semver
+    tag_regex: '^v?\d+\.\d+\.\d+$'
+    delivery:
+      mode: lazycat
+stores:
+  official:
+    enabled: true
+    skip_if_version_exists: true
+    changelog_locales: [zh, en]
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: HandBrake
+    summary: "一个自托管的HandBrake Web平台"

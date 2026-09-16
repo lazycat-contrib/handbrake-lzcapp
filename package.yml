@@ -1,0 +1,17 @@
+package: cloud.lazycat.app.handbrake
+version: 0.8.1
+name: HandBrake
+description: "一个自托管的HandBrake Web平台"
+min_os_version: "1.5.0"
+homepage: https://github.com/TheNickOfTime/handbrake-web
+author: TheNickOfTime
+unsupported_platforms:
+  - ios
+  - android
+locales:
+  zh:
+    name: "HandBrake"
+    description: "一个自托管的HandBrake Web平台"
+  en:
+    name: "HandBrake"
+    description: "A self-hosted platform to use HandBrake on your headless devices via a bespoke web interface"
