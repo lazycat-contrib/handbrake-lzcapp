@@ -4,18 +4,18 @@ application:
   upstreams:
     - location: /
       backend: http://handbrake-server:9999/
-
 services:
   handbrake-server:
     # upstream: ghcr.io/thenickoftime/handbrake-web-server:0.8.1
     user: root
-    image: ghcr.io/thenickoftime/handbrake-web-server:0.8.1
+    # upstream: ghcr.io/thenickoftime/handbrake-web-server:0.8.1
+    image: registry.lazycat.cloud/czyt/thenickoftime/handbrake-web-server:f1e619f63d556f87
     binds:
       - /lzcapp/var/data:/data
       - /lzcapp/var/video:/video
   handbrake-worker:
     # upstream: ghcr.io/thenickoftime/handbrake-web-worker:0.8.1
-    image: ghcr.io/thenickoftime/handbrake-web-worker:0.8.1
+    image: registry.lazycat.cloud/czyt/thenickoftime/handbrake-web-worker:7f496862c3299c95
     user: root
     environment:
       - WORKER_ID=handbrake-worker
