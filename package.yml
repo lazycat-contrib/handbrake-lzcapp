@@ -1,4 +1,5 @@
 package: cloud.lazycat.app.handbrake
+license: AGPL-3.0
 version: 0.8.1
 name: HandBrake
 description: "一个自托管的HandBrake Web平台"
